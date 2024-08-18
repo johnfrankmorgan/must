@@ -1,0 +1,16 @@
+version: "3"
+
+tasks:
+  test:
+    desc: Runs all tests.
+    vars:
+      COVERPROFILE: '{{ .COVERPROFILE | default "tmp/tests/coverage" }}'
+    cmds:
+      - mkdir -p $(dirname {{ .COVERPROFILE }})
+      - go test -race -coverprofile {{ .COVERPROFILE }} ./...
+      - go tool cover -func {{ .COVERPROFILE }}
+
+  lint:
+    desc: Runs linters against the codebase.
+    cmds:
+      - golangci-lint run

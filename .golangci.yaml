@@ -1,0 +1,15 @@
+linters:
+  enable-all: true
+  disable:
+    - depguard
+    - execinquery
+    - exhaustruct
+    - gomnd
+    - varnamelen
+
+issues:
+  exclude-use-default: false
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - err113
