@@ -14,3 +14,9 @@ tasks:
     desc: Runs linters against the codebase.
     cmds:
       - golangci-lint run
+
+  ci:
+    desc: Runs CI checks.
+    cmds:
+      - task: test
+      - task: lint
