@@ -19,25 +19,25 @@ func (c *closer) Close() error {
 	return c.err
 }
 
-func TestClose_Error_Panics(t *testing.T) {
+func TestIOClose_Error_Panics(t *testing.T) {
 	t.Parallel()
 
 	c := &closer{err: errors.New("Close")}
 
 	assert.PanicsWithError(t, "must: unexpected error: Close", func() {
-		must.Close(c)
+		must.IO.Close(c)
 	})
 
 	assert.True(t, c.called)
 }
 
-func TestClose_NoError_DoesNotPanic(t *testing.T) {
+func TestIOClose_NoError_DoesNotPanic(t *testing.T) {
 	t.Parallel()
 
 	c := &closer{}
 
 	assert.NotPanics(t, func() {
-		must.Close(c)
+		must.IO.Close(c)
 	})
 
 	assert.True(t, c.called)
