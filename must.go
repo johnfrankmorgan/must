@@ -2,8 +2,8 @@
 // concise. The functions in this package are intended to be used in situations
 // where an error should never occur.
 //
-//	file := must.Create("file.txt")
-//	defer must.Close(file)
+//	file := must.OS.Create("file.txt")
+//	defer must.IO.Close(file)
 package must
 
 import (
