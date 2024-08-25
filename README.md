@@ -8,8 +8,8 @@ Package `must` provides error handling utilities for Go.
 [![Go Reference](https://pkg.go.dev/badge/github.com/johnfrankmorgan/must.svg)](https://pkg.go.dev/github.com/johnfrankmorgan/must)
 
 ```go
-file := must.Create("file.json")
-defer must.Close(file)
+file := must.OS.Create("file.json")
+defer must.IO.Close(file)
 must.NotError(json.NewEncoder(file).Encode(data))
 ```
 

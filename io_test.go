@@ -86,3 +86,36 @@ func TestIOReadAll_NoError_ReadsData(t *testing.T) {
 
 	assert.Equal(t, "Hello, World!", string(res))
 }
+
+type writer struct {
+	err    error
+	called bool
+}
+
+func (w *writer) Write(p []byte) (int, error) {
+	w.called = true
+
+	return len(p), w.err
+}
+
+func TestIOWriteString_Error_Panics(t *testing.T) {
+	t.Parallel()
+
+	dst := writer{err: errors.New("WriteString")}
+
+	assert.PanicsWithError(t, "must: unexpected error: WriteString", func() {
+		must.IO.WriteString(&dst, "Hello, World!")
+	})
+
+	assert.True(t, dst.called)
+}
+
+func TestIOWriteString_NoError_WritesData(t *testing.T) {
+	t.Parallel()
+
+	dst := bytes.Buffer{}
+
+	must.IO.WriteString(&dst, "Hello, World!")
+
+	assert.Equal(t, "Hello, World!", dst.String())
+}
