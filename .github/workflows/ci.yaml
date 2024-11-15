@@ -34,7 +34,7 @@ jobs:
           go-version-file: go.mod
       - uses: arduino/setup-task@v2
       - run: task test COVERPROFILE=/tmp/coverprofile
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: /tmp/coverprofile
